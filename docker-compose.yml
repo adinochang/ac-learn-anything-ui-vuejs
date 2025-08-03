@@ -1,0 +1,26 @@
+services:
+  app:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+
+    container_name: nodejs_ui_learn_anything  
+
+    working_dir: /app
+    
+    ports:
+      - "${PORT}:5173"
+    
+    # Mount your local source code into the container.
+    volumes:
+      - .:/app
+    
+    # First time node_modules folder init
+    entrypoint: ["/bin/sh", "./docker/docker-entrypoint.sh"]
+
+    # Override the default command for development.
+    command: npm run dev
+    
+    # Define environment variables for API.
+    environment:
+      - NODE_ENV=development

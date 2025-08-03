@@ -1,8 +1,8 @@
 services:
   app:
     build:
-      context: ./docker
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: docker/Dockerfile
 
     container_name: nodejs_ui_learn_anything  
 

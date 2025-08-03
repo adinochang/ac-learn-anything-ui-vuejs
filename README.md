@@ -26,8 +26,8 @@ Follow these instructions to set up and run the project locally.
 ### Prerequisites
 
 * Docker Desktop
-* The back-end API project. [Repository]() 
-2
+* The back-end API project. [Repository](https://github.com/adinochang/ac-learn-anything-api-nodejs) 
+
 Additional pre-requisites without docker:
 
 * Node.js (LTS version recommended)
@@ -37,7 +37,8 @@ Additional pre-requisites without docker:
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/adinochang/ac-learn-anything-ui_vuejs.git
+    git clone git@github.com:adinochang/ac-learn-anything-ui-vuejs.git
+    cd ac-learn-anything-ui-vuejs
     ```
 
 2.  **Set up Environment Variables:**

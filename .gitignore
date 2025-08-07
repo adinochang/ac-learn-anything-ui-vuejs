@@ -2,6 +2,7 @@
 /dist
 .vite/
 .temp/
+src/types/typed-router.d.ts
 
 # Node.js
 /node_modules

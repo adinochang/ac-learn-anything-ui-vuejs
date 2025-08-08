@@ -20,6 +20,10 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const userStore = useUserStore();
 
+  if (userStore.userId && to.path === '/') {
+    next('/dashboard');
+  }
+
   if (to.meta.requiresAuth && !userStore.userId) {
     next('/');
   } else {

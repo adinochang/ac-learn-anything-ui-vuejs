@@ -1,8 +1,10 @@
 <script setup lang="ts">
   import { useUserStore } from '@/stores/useUserStore';
+  import { useRouter } from 'vue-router';
   import type { User } from '@models/User';
 
   const userStore = useUserStore();
+  const router = useRouter();
 
   const login = () => {
     const authenticatedUser: User = {
@@ -10,10 +12,14 @@
       userName: 'Adino',
     };
     userStore.setUser(authenticatedUser);
+
+    router.push('/dashboard');
   };
 
   const logout = () => {
     userStore.logout();
+
+    router.push('/');
   };
 </script>
 

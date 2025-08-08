@@ -23,7 +23,7 @@
       id="navigation"
       class=""
     >
-      AC Learn Anything
+      <router-link to="/">AC Learn Anything</router-link>
     </div>
     <div
       id="user"

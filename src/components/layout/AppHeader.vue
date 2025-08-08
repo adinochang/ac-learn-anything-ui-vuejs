@@ -1,20 +1,9 @@
 <script setup lang="ts">
   import { useUserStore } from '@/stores/useUserStore';
   import { useRouter } from 'vue-router';
-  import type { User } from '@models/User';
 
   const userStore = useUserStore();
   const router = useRouter();
-
-  const login = () => {
-    const authenticatedUser: User = {
-      userId: 123,
-      userName: 'Adino',
-    };
-    userStore.setUser(authenticatedUser);
-
-    router.push('/dashboard');
-  };
 
   const logout = () => {
     userStore.logout();
@@ -43,19 +32,6 @@
         class="px-4 py-1 bg-red-500 text-white rounded-full font-bold shadow-md hover:bg-red-600 transition-colors duration-200"
       >
         Logout
-      </button>
-    </div>
-    <div
-      id="guest"
-      v-if="!userStore.userId"
-      class="flex justify-end items-center"
-    >
-      <button
-        id="login-button"
-        @click="login"
-        class="px-4 py-1 bg-green-500 text-white rounded-full font-bold shadow-md hover:bg-green-600 transition-colors duration-200"
-      >
-        Login
       </button>
     </div>
   </div>

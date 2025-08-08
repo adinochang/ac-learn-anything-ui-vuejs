@@ -5,5 +5,9 @@
 <template>
   <AppHeader></AppHeader>
 
-  <router-view></router-view>
+  <div
+    class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen antialiased"
+  >
+    <router-view></router-view>
+  </div>
 </template>

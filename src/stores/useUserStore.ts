@@ -8,6 +8,9 @@ export const useUserStore = defineStore('user', {
     userName: null as string | null,
     token: null as string | null,
   }),
+  getters: {
+    isAuthenticated: (state) => !!state.token,
+  },
   // functions to manipulate the state
   actions: {
     setUser(data: User) {

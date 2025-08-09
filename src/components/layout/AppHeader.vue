@@ -22,7 +22,7 @@
     </div>
     <div
       id="user"
-      v-if="userStore.userId"
+      v-if="userStore.isAuthenticated"
       class="flex justify-end items-center"
     >
       <div class="mr-4">{{ userStore.userName }}</div>

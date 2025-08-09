@@ -24,7 +24,7 @@ router.beforeEach((to, from, next) => {
     next('/dashboard');
   }
 
-  if (to.meta.requiresAuth && !userStore.userId) {
+  if (to.meta.requiresAuth && !userStore.isAuthenticated) {
     next('/');
   } else {
     next();

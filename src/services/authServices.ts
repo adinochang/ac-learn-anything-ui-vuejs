@@ -6,7 +6,7 @@ const userStore = useUserStore();
 
 export const loginService = async (params: LoginRequestParams) => {
   try {
-    // create user using API
+    // login using API
     const { data } = await axios.post(
       `${import.meta.env.VITE_API_URL}user/login`,
       params

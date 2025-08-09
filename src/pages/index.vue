@@ -1,11 +1,10 @@
 <script setup lang="ts">
-  import { useUserStore } from '@/stores/useUserStore';
   import { useRouter } from 'vue-router';
   import { ref } from 'vue';
-  import axios from 'axios';
+  import { loginService } from '@/services/authServices';
   import { getErrorMessage } from '@utils/axios-error-handler';
+  import type { LoginRequestParams } from '@/types/request';
 
-  const userStore = useUserStore();
   const router = useRouter();
 
   const email = ref('');
@@ -23,23 +22,12 @@
     error.value = '';
 
     try {
-      const formData = {
+      const formData: LoginRequestParams = {
         email: email.value,
         password: password.value,
       };
 
-      // create user using API
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}user/login`,
-        formData
-      );
-
-      // persist created user
-      userStore.setUser({
-        userId: data.userId,
-        userName: data.userName,
-        token: data.token,
-      });
+      await loginService(formData);
 
       // redirect to chat
       router.push('/dashboard');
@@ -99,12 +87,9 @@
           {{ error }}
         </p>
         <div class="mt-4 text-center">
-          <a
-            href="#"
-            class="text-sm text-blue-500 hover:underline"
-          >
+          <router-link to="/user/register/">
             Need an account? Sign Up
-          </a>
+          </router-link>
         </div>
       </div>
     </div>

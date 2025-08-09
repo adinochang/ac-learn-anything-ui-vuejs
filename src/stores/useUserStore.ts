@@ -6,16 +6,19 @@ export const useUserStore = defineStore('user', {
   state: () => ({
     userId: null as number | null,
     userName: null as string | null,
+    token: null as string | null,
   }),
   // functions to manipulate the state
   actions: {
     setUser(data: User) {
       this.userId = data.userId;
       this.userName = data.userName;
+      this.token = data.token;
     },
     logout() {
       this.userId = null;
       this.userName = null;
+      this.token = null;
     },
   },
   // persists data across page reloads

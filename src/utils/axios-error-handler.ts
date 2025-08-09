@@ -17,6 +17,10 @@ export const getErrorMessage = (err: unknown): string => {
     }
   }
 
+  if (err instanceof Error) {
+    return `${err.message}`;
+  }
+
   // For other types of errors
   return 'Something went wrong. Please try again.';
 };

@@ -8,6 +8,7 @@
       "@/*": ["./src/*"],
       "@models/*": ["./src/models/*"],
       "@stores/*": ["./src/stores/*"],
+      "@utils/*": ["./src/utils/*"],
     },
     "types": ["unplugin-vue-router/client"]
   }

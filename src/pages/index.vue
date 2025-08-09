@@ -29,7 +29,7 @@
 
       await loginService(formData);
 
-      // redirect to chat
+      // redirect to dashboard
       router.push('/dashboard');
     } catch (err: unknown) {
       error.value = getErrorMessage(err);

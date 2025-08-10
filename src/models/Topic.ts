@@ -17,3 +17,16 @@ export interface Topic {
   status: TopicStatus;
   level: TopicLevel;
 }
+
+export const getTopicLevelText = (level: number): string => {
+  switch (level) {
+    case TopicLevel.Beginner:
+      return 'Beginner';
+    case TopicLevel.Intermediate:
+      return 'Intermediate';
+    case TopicLevel.Advanced:
+      return 'Advanced';
+    default:
+      return '';
+  }
+};

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { useRouter } from 'vue-router';
   import { ref, onMounted } from 'vue';
   import { useTopicStore } from '@/stores/useTopicStore';
   import { getUserTopicsService } from '@/services/topicServices';
@@ -12,6 +13,8 @@
     },
   });
 
+  const router = useRouter();
+
   const error = ref('');
 
   const topicStore = useTopicStore();
@@ -23,6 +26,10 @@
       error.value = getErrorMessage(err);
     }
   });
+
+  const loadNewTopicPage = () => {
+    router.push('/subject/new');
+  };
 </script>
 
 <template>
@@ -46,7 +53,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <button
         id="add-subject-button"
-        router
+        @click="loadNewTopicPage"
         class="bg-purple-600 text-white flex items-center justify-center p-6 rounded-3xl shadow-lg transition-transform transform hover:scale-105 duration-300 min-h-[150px]"
       >
         <div class="flex flex-col items-center">
@@ -54,6 +61,7 @@
           <span class="text-xl font-bold">Add New Topic</span>
         </div>
       </button>
+
       <DashboardTopicCard
         v-for="(topic, index) in topicStore.topics"
         v-bind:key="topic.topicId"

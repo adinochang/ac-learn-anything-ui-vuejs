@@ -15,6 +15,14 @@ export const useTopicStore = defineStore('topic', {
       this.topics = data;
     },
 
+    addTopic(newTopic: Topic) {
+      if (!this.topics) {
+        this.topics = [newTopic];
+      } else {
+        this.topics.unshift(newTopic);
+      }
+    },
+
     resetTopics() {
       this.topics = null;
     },

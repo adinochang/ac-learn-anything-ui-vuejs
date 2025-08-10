@@ -1,10 +1,15 @@
 <script setup lang="ts">
   import { useRouter } from 'vue-router';
   import { ref } from 'vue';
-  import { getTopicSummaryService } from '@/services/topicServices';
+  import {
+    getTopicSummaryService,
+    createUserTopicService,
+  } from '@/services/topicServices';
   import { getErrorMessage } from '@utils/axios-error-handler';
-  import type { GetTopicInfoParams } from '@/types/request';
-  import { TopicLevel, getTopicLevelText } from '@/models/Topic';
+  import type {
+    GetTopicInfoParams,
+    CreateTopicInfoParams,
+  } from '@/types/request';
   import FormInput from '@/components/common/FormInput.vue';
   import FormSelect from '@/components/common/FormSelect.vue';
   import ConfirmYesNoModal from '@/components/modals/ConfirmYesNoModal.vue';
@@ -73,11 +78,17 @@
 
         // if confirmed again, proceed to create topic
         if (summaryConfirmation) {
+          const newTopicParams: CreateTopicInfoParams = {
+            topic: newTopic.value,
+            description: topicSummary,
+          };
+
           // call create topic service
+          await createUserTopicService(newTopicParams);
 
           // prompt an information message
           await promptInfo(
-            'Subject has been created. Click on the Subject card in your dashboard to view deatailed lesson plans and important terms.'
+            'Subject has been created. Click on the Subject card in your dashboard to view detailed lesson plans and important terms.'
           );
 
           // redirect to dashboard

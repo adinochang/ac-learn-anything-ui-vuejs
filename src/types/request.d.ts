@@ -9,6 +9,11 @@ export interface CreateUserParams {
   password: string;
 }
 
+export interface CreateTopicInfoParams {
+  topic: string;
+  description: string;
+}
+
 export interface GetTopicInfoParams {
   topic: string;
 }

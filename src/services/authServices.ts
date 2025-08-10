@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useUserStore } from '@/stores/useUserStore';
-import type { CreateUserParams, LoginRequestParams } from '../types/request';
+import type { CreateUserParams, LoginRequestParams } from '@/types/request';
 
 const userStore = useUserStore();
 

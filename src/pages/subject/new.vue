@@ -1,11 +1,12 @@
 <script setup lang="ts">
-  // import { useUserStore } from '@/stores/useUserStore';
   import { useRouter } from 'vue-router';
   import { ref } from 'vue';
-  // import { createUserService } from '@/services/authServices';
+  import { getTopicSummaryService } from '@/services/topicServices';
   import { getErrorMessage } from '@utils/axios-error-handler';
-  // import type { CreateUserParams } from '@/types/request';
+  import type { GetTopicInfoParams } from '@/types/request';
+  import { TopicLevel, getTopicLevelText } from '@/models/Topic';
   import FormInput from '@/components/common/FormInput.vue';
+  import FormSelect from '@/components/common/FormSelect.vue';
   import ConfirmYesNoModal from '@/components/modals/ConfirmYesNoModal.vue';
   import InformationModal from '@/components/modals/InformationModal.vue';
 
@@ -16,9 +17,12 @@
   });
 
   const newTopic = ref('Jazz Music');
+  const newTopicLevel = ref('');
   const isLoading = ref(false);
 
   const error = ref('');
+
+  const levelOptions = ['Beginner', 'Intermediate', 'Advanced'];
 
   const confirmModalVisible = ref(false);
   const confirmModalMessage = ref('');
@@ -51,14 +55,16 @@
     try {
       // confirm user wants to learn about topic
       const topicConfirmation = await promptConfirmation(
-        `Are you sure you want to learn ${newTopic.value}?`
+        `Are you sure you want to learn ${newTopic.value} at ${newTopicLevel.value} level?`
       );
 
       // if confirmed, get a topic summary from AI
       if (topicConfirmation) {
+        const params: GetTopicInfoParams = {
+          topic: newTopic.value,
+        };
         // call topic summary service
-        const topicSummary =
-          'Jazz music is a genre that originated in the early 20th century, characterized by swing rhythms, improvisation, and a blend of African American musical traditions with elements of blues, ragtime, and classical music.';
+        const topicSummary = await getTopicSummaryService(params);
 
         // ask for confirmation again
         const summaryConfirmation = await promptConfirmation(
@@ -143,11 +149,21 @@
           class="space-y-4"
         >
           <FormInput
-            id="name"
+            id="topic"
             label=""
             type="text"
             placeholder="What do you want to learn?"
             v-model="newTopic"
+            :disabled="isLoading"
+          />
+
+          <FormSelect
+            id="level"
+            label="My knowledge in this subject is"
+            :options="levelOptions"
+            placeholder="Select a level"
+            v-model="newTopicLevel"
+            :disabled="isLoading"
           />
 
           <button

@@ -8,3 +8,7 @@ export interface CreateUserParams {
   email: string;
   password: string;
 }
+
+export interface GetTopicInfoParams {
+  topic: string;
+}

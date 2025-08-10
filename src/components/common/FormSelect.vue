@@ -4,9 +4,9 @@
   const props = defineProps<{
     id: string;
     label: string;
-    type: string;
     placeholder: string;
     disabled: boolean;
+    options: string[];
     modelValue: string;
     error?: string;
   }>();
@@ -38,15 +38,21 @@
         {{ error }}
       </span>
     </label>
-    <input
-      :type="type"
+    <select
       :id="id"
       v-model="value"
-      :placeholder="placeholder"
       :disabled="disabled"
       required
-      class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       :class="{ 'border-red-500 dark:border-red-500': error }"
-    />
+    >
+      <option disabled>{{ placeholder }}</option>
+      <option
+        v-for="option in options"
+        :key="option"
+      >
+        {{ option }}
+      </option>
+    </select>
   </div>
 </template>
